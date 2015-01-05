@@ -61,5 +61,12 @@ function pos2number(char::Char)
 end
 
 
+function construct_bban_re(pattern)
+    re = join([*(re_format[f], "{", string(n), "}") for (n, f) in pattern])
+    re = Regex(re)
+    return re
+end
+
+
 bban_length(pattern) = sum([n for (n, f) in pattern])
 iban_length(pattern) = bban_length(pattern) + 4

@@ -20,11 +20,11 @@ test_wban3 = "GB82 WEST 1234 5698 7654 3200"
 bban_GB_re = r"[A-Z]{4}[0-9]{14}"
 @test ismatch(bban_GB_re, "WEST12345698765432")
 
-bban_gb_rexp = construct_bban_re(bban_format["GB"])
-@test bban_GB_re == bban_gb_rexp
+bban_gb_rexp = IBAN.construct_bban_re(IBAN.bban_format["GB"])
+@test bban_GB_re.pattern == bban_gb_rexp.pattern
 
-@test bban_length(bban_format["GB"]) == 18
-@test iban_length(bban_format["GB"]) == 22
+@test IBAN.bban_length(IBAN.bban_format["GB"]) == 18
+@test IBAN.iban_length(IBAN.bban_format["GB"]) == 22
 
 ## split IBAN
 country, checksum, bban = split_iban(test_iban1)
