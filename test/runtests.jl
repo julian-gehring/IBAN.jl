@@ -8,13 +8,24 @@ test_iban1 = "GB82 WEST 1234 5698 7654 32"
 @test is_valid_iban(replace(test_iban1, " ", ""))
 @test is_valid_iban(replace(test_iban1, " ", ","))
 
-## invalid IBANs
+### invalid IBANs
+
+## wrong bban
 test_wban1 = "GB82 WEST 2134 5698 7654 32"
-@test_throws ErrorException is_valid_iban(test_wban1)
+@test !is_valid_iban(test_wban1)
+
+## unknown country
 test_wban2 = "GX82 WEST 1234 5698 7654 32"
-@test_throws ErrorException is_valid_iban(test_wban2)
+@test !is_valid_iban(test_wban2)
+
+## wrong bban length
 test_wban3 = "GB82 WEST 1234 5698 7654 3200"
-@test_throws ErrorException is_valid_iban(test_wban3)
+@test !is_valid_iban(test_wban3)
+
+## wrong global re
+test_wban4 = "GEXX WEST 1234 5698 7654 32"
+@test !is_valid_iban(test_wban4)
+
 
 ## example fake, valid IBANs
 valid_ibans = [

@@ -1,19 +1,26 @@
 function is_valid_iban(iban::String)
-    @assert is_valid_ascii(iban)
+    if !is_valid_ascii(iban)
+        return false
+    end
     ## convert to common format
     iban = unify_iban(iban)
     m = match(iban_global_re, iban)
     if m == nothing
-        error("IBAN '$(iban)' not according to format")
+        return false
     end
     country, check_digits, bban = m.captures
     ## supported country
-    @assert haskey(iban_country_length, country)
+    if !haskey(iban_country_length, country)
+        return false
+    end
     ## check total length
-    @assert length(iban) == iban_country_length[country]
+    if length(iban) != iban_country_length[country]
+        return false
+    end
     ## reformat iban
-    is_valid_base97 = is_iban_base97(iban)
-    @assert is_valid_base97
+    if !is_iban_base97(iban)
+        return false
+    end
     return true
 end
 
