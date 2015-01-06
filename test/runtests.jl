@@ -99,3 +99,11 @@ bban_gb_rexp = IBAN.construct_bban_re(IBAN.bban_format["GB"])
 country, checksum, bban = split_iban(test_iban1)
 @test country == "GB"
 @test checksum == "82"
+
+## pos2number
+@test IBAN.pos2number('A') == 10
+@test IBAN.pos2number('B') == 11
+@test IBAN.pos2number('Z') == 35
+@test IBAN.pos2number('1') == 1
+@test IBAN.pos2number('9') == 9
+@test_throws ErrorException IBAN.pos2number('!')

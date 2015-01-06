@@ -35,7 +35,7 @@ function split_iban(iban::String)
 end
 
 
-## iban validation utils ##
+### iban validation utils
 
 function unify_iban(iban::String)
     iban = replace(iban, " ", "")
