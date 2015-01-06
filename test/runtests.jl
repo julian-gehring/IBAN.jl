@@ -100,6 +100,11 @@ country, checksum, bban = split_iban(test_iban1)
 @test country == "GB"
 @test checksum == "82"
 
+## wrong global re
+test_wban4 = "GEXX WEST 1234 5698 7654 32"
+@test_throws ErrorException split_iban(test_wban4)
+
+
 ## pos2number
 @test IBAN.pos2number('A') == 10
 @test IBAN.pos2number('B') == 11
