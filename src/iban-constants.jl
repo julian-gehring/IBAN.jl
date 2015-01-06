@@ -1,6 +1,6 @@
 const re_format = Dict([('a', "[A-Z]"), ('c', "[A-Z0-9]"), ('n', "[0-9]")])
 
-const iban_global_re = r"([A-Z]{2})([0-9]{2})([A-Z0-9]{10,34})"
+const iban_global_re = r"^([A-Z]{2})([0-9]{2})([A-Z0-9]{10,34})$"
 
 const iban_country_length = Dict([
                             ("AL", 28),  # Albania
