@@ -1,7 +1,4 @@
 function is_valid_iban(iban::String)
-    if !is_valid_ascii(iban)
-        return false
-    end
     ## convert to common format
     iban = unify_iban(iban)
     m = match(iban_global_re, iban)
